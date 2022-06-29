@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Service;
 
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +20,7 @@ public class JwtSecurityTokenGeneratorImpl implements SecurityTokenGenerator  {
 
 
     String jwtToken = null;
-    jwtToken = Jwts.builder().setSubject(user.getUsername()).setIssuedAt(new Date())
+    jwtToken = Jwts.builder().setSubject(user.getUsername()).setIssuedAt(new Date()).setExpiration(new Date(System.currentTimeMillis()+60000))
       .signWith(SignatureAlgorithm.HS256,"secretkey").compact();
 
     Map<String,String> map = new HashMap<>();
